@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,7 +106,6 @@
       text-decoration: underline;
     }
 
-    /* Hide forms */
     .form {
       display: none;
       animation: fadeIn 0.4s ease;
@@ -120,32 +123,32 @@
     <div class="icon-lock">🔒</div>
 
     <!-- LOGIN FORM -->
-    <form id="loginForm" class="form" action="<?php $_SERVER["PHP_SELF"]?>" method="POST">
+    <form id="loginForm" class="form" action="<?= htmlspecialchars( $_SERVER['PHP_SELF'])?>" method="post">
       <h2>Login</h2>
-      <label for="loginEmail">Email Address</label>
-      <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+      <label>Email Address</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
 
-      <label for="loginPassword">Password</label>
-      <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter your password" required>
 
-      <button type="submit">Login</button>
+      <button type="submit" name="login">Login</button>
       <a href="#" class="link" onclick="formActive('registerForm')">Don’t have an account? Register</a>
     </form>
 
     <!-- REGISTER FORM -->
-    <form id="registerForm" class="form active" action="<?php $_SERVER["PHP_SELF"]?>" method="POST">
+    <form id="registerForm" class="form active" action="login_register.php" method="post">
       <h2>Create Account</h2>
-      <label for="regName">Full Name</label>
-      <input type="text" id="regName" name="name" placeholder="Enter your name" required>
+      <label>Full Name</label>
+      <input type="text" name="name" placeholder="Enter your name" required>
 
-      <label for="regEmail">Email Address</label>
-      <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+      <label>Email Address</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
 
-      <label for="regPassword">Password</label>
-      <input type="password" id="regPassword" name="password" placeholder="Enter your password" required>
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter your password" required>
 
-      <label for="regRole">Role</label>
-      <select id="regRole" name="role" required>
+      <label>Role</label>
+      <select name="role" required>
         <option value="">-- Select Role --</option>
         <option value="admin">Admin</option>
         <option value="user">User</option>
@@ -158,14 +161,11 @@
 
   </div>
 
-
-
 <script>
 function formActive(formId){
-  document.querySelectorAll(".form").forEach(form =>form.classList.remove("active"))
-  document.getElementById(formId).classList.add("active")
+  document.querySelectorAll(".form").forEach(form => form.classList.remove("active"));
+  document.getElementById(formId).classList.add("active");
 }
-
 </script>
 </body>
 </html>

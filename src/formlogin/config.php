@@ -1,14 +1,12 @@
 <?php
-$server="localhost";
-$user ="root";
-$pass ="";
-$database_name ="databasestudent";
-
-$conn = new mysqli($server,$user,$pass,$database_name);
+$host='localhost';
+$user ='root';
+$pass='';
+$database='zando_database';
+$conn = new mysqli($host,$user,$pass,$database);
 if($conn->connect_error){
-    die("connect fail:".$conn->connect_error);
-}else{
-    echo"success connect";
+    die("connected fail".$conn->connect_error);
 }
+
 
 ?>
