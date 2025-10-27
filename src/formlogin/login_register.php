@@ -1,8 +1,7 @@
-
 <?php
 session_start();
 require_once'config.php';
-if( isset($_POST['register'])){
+if($_SERVER['REQUEST_METHOD']==='POST'&& isset($_POST['register'])){
     $name =$_POST['name'];
     $email =filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
     $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
@@ -15,7 +14,8 @@ if( isset($_POST['register'])){
    }catch(mysqli_sql_exception){
     echo"not success";
    }
-
+header("Location: index.php");
+exit();
 
 }
 
