@@ -122,7 +122,7 @@ session_start();
     <div class="icon-lock">🔒</div>
 
     <!-- LOGIN FORM -->
-    <form id="loginForm" class="form" action="<?= htmlspecialchars( $_SERVER['PHP_SELF'])?>" method="post">
+    <form id="loginForm" class="form" action="login_register.php" method="post">
       <h2>Login</h2>
       <label>Email Address</label>
       <input type="email" name="email" placeholder="Enter your email" required>
