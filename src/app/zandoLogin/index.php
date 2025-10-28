@@ -1,3 +1,21 @@
+<?php
+session_start();
+$errors=[
+    'login' =>$_SESSION['login_error']??'',
+    'register' =>$_SESSION['register_error']??''
+];
+$activeForm =$_SESSION['active_form'] ?? 'register';
+session_unset();
+function showError($error){
+    return !empty($error) ? "<p class='error-message'>$error</p>":'';
+}
+function isActive($formName,$activeForm){
+    return $formName ===$activeForm?'active':'';
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,20 +101,20 @@
             transform: scale(1.05);
         }
 
-        .switch {
+        a {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
             color: #aaa;
         }
 
-        .switch span {
+        a {
             color: #00f0ff;
             cursor: pointer;
             font-weight: bold;
         }
 
-        .hidden { display: none; }
+    
 
         /* Cool animated background effect */
         body::before {
@@ -123,13 +141,21 @@
         option{
             color: black;
         }
+         .form{
+            display: none;
+         }
+         .active{
+            display: flex;
+         }
+    
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Registration Form -->
-        <form id="registerForm">
+        <form id="registerForm" class="form <?= isActive('register',$activeForm)?>" action="log_register.php" method="post">
             <h2>Register</h2>
+            <?= showError($errors['register'])?>
             <input type="text" name="name" placeholder="Full Name" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
@@ -138,25 +164,29 @@
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
             </select>
-            <button type="submit">Register</button>
-            <div class="switch">Already have an account? <span onclick="toggleForms()">Login</span></div>
+            <button type="submit" name="register">Register</button>
+            <a href="#" class="switch" onclick="toggleForms()" >Already have an account? Login</a>
+
         </form>
 
         <!-- Login Form -->
-        <form id="loginForm" class="hidden">
+        <form id="loginForm" class=" form <?= isActive('login',$activeForm)?>"  action="log_register.php" method="post">
             <h2>Login</h2>
+            <?= showError($errors['login'])?>
+
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-            <div class="switch">Don't have an account? <span onclick="toggleForms()">Register</span></div>
+            <button type="submit" name="login">Login</button>
+            <a href="#" class="switch" onclick="toggleForms()" >Don't have an account?Register</a>
         </form>
     </div>
 
     <script>
-        function toggleForms() {
-            document.getElementById('registerForm').classList.toggle('hidden');
-            document.getElementById('loginForm').classList.toggle('hidden');
-        }
+       function toggleForms() {
+    document.getElementById('registerForm').classList.toggle('active');
+    document.getElementById('loginForm').classList.toggle('active');
+}
+
     </script>
 </body>
 </html>
