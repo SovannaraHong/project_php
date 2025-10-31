@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 break;
             case "divide":
                 if ($num2 == 0) {
-                    $error = 'Cannot divide by zero.';
+                    $error = 'Cannot divide by zerod.';
                 } else {
                     $value = $num1 / $num2;
                 }
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Simple Calculator Layout</title>
+<title>System Calculate</title>
 <style>
     body {
         font-family: Arial, sans-serif;
